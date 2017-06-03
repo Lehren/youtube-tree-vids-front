@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Col, Grid, Navbar, Row } from "react-bootstrap";
 import IntroText from "../IntroText/IntroText";
+import InputBar from "../InputBar/InputBar";
 import "./App.css";
 
 class App extends Component {
@@ -19,6 +20,7 @@ class App extends Component {
           <Row>
             <Col md={12}>
               <IntroText />
+              <InputBar text="Enter Youtube URL" />
             </Col>
           </Row>
         </Grid>
