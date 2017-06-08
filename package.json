@@ -5,7 +5,8 @@
   "dependencies": {
     "react": "^15.5.4",
     "react-bootstrap": "^0.31.0",
-    "react-dom": "^15.5.4"
+    "react-dom": "^15.5.4",
+    "react-youtube": "^7.4.0"
   },
   "devDependencies": {
     "enzyme": "^2.8.2",
@@ -23,10 +24,10 @@
     "eject": "react-scripts eject",
     "precommit": "lint-staged"
   },
-    "lint-staged": {
-      "src/**/*.*": [
-        "prettier --write",
-        "git add"
-      ]
-    }
+  "lint-staged": {
+    "src/**/*.*": [
+      "prettier --write",
+      "git add"
+    ]
+  }
 }
