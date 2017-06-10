@@ -30,4 +30,56 @@ describe(SearchDisplayYoutube, () => {
     inputElement.simulate("change", { target: { value: textToType } });
     expect(spyOnChange).toHaveBeenCalledTimes(1);
   });
+
+  it("should call the onKeyPress method when something is pressed", () => {
+    const textToType = "I have typed something";
+    const component = mount(<SearchDisplayYoutube />);
+    const spyOnKeyPress = jest.spyOn(component.instance(), "onKeyPress");
+    component.update();
+    const inputElement = component.find("FormControl");
+    inputElement.simulate("keyPress", { target: { value: textToType } });
+    expect(spyOnKeyPress).toHaveBeenCalledTimes(1);
+  });
+
+  it("should only set the url when the enter key is pressed", () => {
+    const textToType = "I have typed something";
+    const component = mount(<SearchDisplayYoutube />);
+    const spyOnKeyPress = jest.spyOn(component.instance(), "onKeyPress");
+    const spyOnChange = jest.spyOn(component.instance(), "onChange");
+    component.update();
+
+    const inputElement = component.find("FormControl");
+    inputElement.simulate("change", { target: { value: textToType } });
+    expect(component.state().value).toBe(textToType);
+    expect(component.state().url).toBe("");
+
+    inputElement.simulate("keyPress", { key: "Enter" });
+
+    expect(component.state().value).toBe(textToType);
+    expect(component.state().url).toBe(textToType);
+
+    expect(spyOnChange).toHaveBeenCalledTimes(1);
+    expect(spyOnKeyPress).toHaveBeenCalledTimes(1);
+  });
+
+  it("should not set the url when the enter key is not pressed", () => {
+    const textToType = "I have typed something";
+    const component = mount(<SearchDisplayYoutube />);
+    const spyOnKeyPress = jest.spyOn(component.instance(), "onKeyPress");
+    const spyOnChange = jest.spyOn(component.instance(), "onChange");
+    component.update();
+
+    const inputElement = component.find("FormControl");
+    inputElement.simulate("change", { target: { value: textToType } });
+    expect(component.state().value).toBe(textToType);
+    expect(component.state().url).toBe("");
+
+    inputElement.simulate("keyPress", { key: "LeftArrow" });
+
+    expect(component.state().value).toBe(textToType);
+    expect(component.state().url).toBe("");
+
+    expect(spyOnChange).toHaveBeenCalledTimes(1);
+    expect(spyOnKeyPress).toHaveBeenCalledTimes(1);
+  });
 });

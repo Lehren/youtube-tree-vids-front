@@ -9,6 +9,7 @@ class InputBar extends Component {
         value={this.props.value}
         placeholder={this.props.text}
         onChange={this.props.onChange}
+        onKeyPress={this.props.onKeyPress}
       />
     );
   }
