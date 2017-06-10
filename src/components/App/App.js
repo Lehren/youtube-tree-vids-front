@@ -16,10 +16,16 @@ class App extends Component {
             <Navbar.Toggle />
           </Navbar.Header>
         </Navbar>
-        <Grid>
+        <Grid fluid={true}>
           <Row>
             <Col md={12}>
               <IntroText />
+            </Col>
+          </Row>
+        </Grid>
+        <Grid>
+          <Row>
+            <Col md={12}>
               <SearchDisplayYoutube />
             </Col>
           </Row>
