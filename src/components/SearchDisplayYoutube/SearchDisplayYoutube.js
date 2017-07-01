@@ -10,7 +10,7 @@ class SearchDisplayYoutube extends Component {
       value: "",
       url: ""
     };
-    this.youtubeURLRegex = /^https?:\/\/(?:www\.)?youtu(?:\.be|be\.com)\/(?:\S+\/)?(?:[^\s\/]*(?:\?|&)vi?=)?([^#?&]+)/;
+    this.youtubeURLRegex = /^https?:\/\/(?:www\.)?youtu(?:\.be|be\.com)\/(?:\S+\/)?(?:[^\s/]*(?:\?|&)vi?=)?([^#?&]+)/;
 
     this.onChange = this.onChange.bind(this);
     this.onKeyPress = this.onKeyPress.bind(this);
