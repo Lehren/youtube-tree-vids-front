@@ -42,7 +42,7 @@ describe(SearchDisplayYoutube, () => {
   });
 
   it("should only set the url when the enter key is pressed", () => {
-    const textToType = "I have typed something";
+    const textToType = "https://www.youtube.com/watch?v=YW5-0zxpVqY";
     const component = mount(<SearchDisplayYoutube />);
     const spyOnKeyPress = jest.spyOn(component.instance(), "onKeyPress");
     const spyOnChange = jest.spyOn(component.instance(), "onChange");
@@ -56,7 +56,7 @@ describe(SearchDisplayYoutube, () => {
     inputElement.simulate("keyPress", { key: "Enter" });
 
     expect(component.state().value).toBe(textToType);
-    expect(component.state().url).toBe(textToType);
+    expect(component.state().url).toBe("YW5-0zxpVqY");
 
     expect(spyOnChange).toHaveBeenCalledTimes(1);
     expect(spyOnKeyPress).toHaveBeenCalledTimes(1);
@@ -81,5 +81,35 @@ describe(SearchDisplayYoutube, () => {
 
     expect(spyOnChange).toHaveBeenCalledTimes(1);
     expect(spyOnKeyPress).toHaveBeenCalledTimes(1);
+  });
+
+  it("should get the id from a youtube url when it is typed and the enter key is pressed", () => {
+    const youtubeUrls = [
+      "http://www.youtube.com/user/dreamtheater#p/u/1/oTJRivZTMLs",
+      "https://youtu.be/oTJRivZTMLs?list=PLToa5JuFMsXTNkrLJbRlB--76IAOjRM9b",
+      "http://www.youtube.com/watch?v=oTJRivZTMLs&feature=youtu.be",
+      "https://youtu.be/oTJRivZTMLs",
+      "http://youtu.be/oTJRivZTMLs&feature=channel",
+      "http://www.youtube.com/ytscreeningroom?v=oTJRivZTMLs",
+      "http://www.youtube.com/embed/oTJRivZTMLs?rel=0",
+      "http://youtube.com/v/oTJRivZTMLs&feature=channel",
+      "http://youtube.com/v/oTJRivZTMLs&feature=channel",
+      "http://youtube.com/vi/oTJRivZTMLs&feature=channel",
+      "http://youtube.com/?v=oTJRivZTMLs&feature=channel",
+      "http://youtube.com/?feature=channel&v=oTJRivZTMLs",
+      "http://youtube.com/?vi=oTJRivZTMLs&feature=channel",
+      "http://youtube.com/watch?v=oTJRivZTMLs&feature=channel",
+      "http://youtube.com/watch?vi=oTJRivZTMLs&feature=channel"
+    ];
+
+    const wantedId = "oTJRivZTMLs";
+
+    youtubeUrls.map(url => {
+      const component = mount(<SearchDisplayYoutube />);
+      const inputElement = component.find("FormControl");
+      inputElement.simulate("change", { target: { value: url } });
+      inputElement.simulate("keyPress", { key: "Enter" });
+      expect(component.state().url).toEqual(wantedId);
+    });
   });
 });
