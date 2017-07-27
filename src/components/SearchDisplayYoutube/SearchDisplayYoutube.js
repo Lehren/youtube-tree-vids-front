@@ -49,7 +49,9 @@ class SearchDisplayYoutube extends Component {
         </Row>
         <Row className="bottom-margin">
           <Col>
-            <EmbeddedYoutube url={this.state.url} />
+            {this.state.url !== ""
+              ? <EmbeddedYoutube url={this.state.url} />
+              : null}
           </Col>
         </Row>
       </div>
