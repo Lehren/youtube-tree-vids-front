@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import { Col, Row } from "react-bootstrap";
 import EmbeddedYoutube from "../EmbeddedYoutube/EmbeddedYoutube";
 import InputBar from "../InputBar/InputBar";
+import GeneratePlaylistButton from "../GeneratePlayListButton/GeneratePlaylistButton";
+import "./SearchDisplayYoutube.css";
 
 class SearchDisplayYoutube extends Component {
   constructor(props) {
@@ -50,7 +52,10 @@ class SearchDisplayYoutube extends Component {
         <Row className="bottom-margin">
           <Col>
             {this.state.url !== ""
-              ? <EmbeddedYoutube url={this.state.url} />
+              ? <div>
+                  <EmbeddedYoutube url={this.state.url} />
+                  <GeneratePlaylistButton />
+                </div>
               : null}
           </Col>
         </Row>
