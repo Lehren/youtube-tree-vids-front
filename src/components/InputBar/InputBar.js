@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { FormControl } from "react-bootstrap";
+import PropTypes from "prop-types";
 
 class InputBar extends Component {
   render() {
@@ -14,5 +15,12 @@ class InputBar extends Component {
     );
   }
 }
+
+InputBar.propTypes = {
+  value: PropTypes.string,
+  text: PropTypes.string,
+  onChange: PropTypes.func,
+  onKeyPress: PropTypes.func
+};
 
 export default InputBar;

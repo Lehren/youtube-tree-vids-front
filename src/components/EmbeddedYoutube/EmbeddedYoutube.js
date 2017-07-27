@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Col, ResponsiveEmbed, Row } from "react-bootstrap";
 import Youtube from "react-youtube";
+import PropTypes from "prop-types";
 
 class EmbeddedYoutube extends Component {
   render() {
@@ -23,5 +24,9 @@ class EmbeddedYoutube extends Component {
     );
   }
 }
+
+EmbeddedYoutube.propTypes = {
+  url: PropTypes.string
+};
 
 export default EmbeddedYoutube;
