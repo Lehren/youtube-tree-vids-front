@@ -54,7 +54,7 @@ class SearchDisplayYoutube extends Component {
             {this.state.url !== ""
               ? <div>
                   <EmbeddedYoutube url={this.state.url} />
-                  <GeneratePlaylistButton />
+                  <GeneratePlaylistButton videoId={this.state.url} />
                 </div>
               : null}
           </Col>
