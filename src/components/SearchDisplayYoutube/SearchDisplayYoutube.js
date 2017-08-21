@@ -69,7 +69,9 @@ class SearchDisplayYoutube extends Component {
                 </div>
               : null}
 
-            {this.state.videos.length !== 0 ? <div /> : null}
+            {this.state.videos.length !== 0
+              ? <VideoList videos={this.state.videos} />
+              : null}
           </Col>
         </Row>
       </div>
