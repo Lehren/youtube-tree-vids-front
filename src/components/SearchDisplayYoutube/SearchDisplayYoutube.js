@@ -3,6 +3,7 @@ import { Col, Row } from "react-bootstrap";
 import EmbeddedYoutube from "../EmbeddedYoutube/EmbeddedYoutube";
 import InputBar from "../InputBar/InputBar";
 import GeneratePlaylistButton from "../GeneratePlayListButton/GeneratePlaylistButton";
+import VideoList from "../VideoList/VideoList";
 import "./SearchDisplayYoutube.css";
 
 class SearchDisplayYoutube extends Component {
