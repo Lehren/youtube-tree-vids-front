@@ -10,12 +10,14 @@ class SearchDisplayYoutube extends Component {
     super(props);
     this.state = {
       value: "",
-      url: ""
+      url: "",
+      videos: []
     };
     this.youtubeURLRegex = /^https?:\/\/(?:www\.)?youtu(?:\.be|be\.com)\/(?:\S+\/)?(?:[^\s/]*(?:\?|&)vi?=)?([^#?&]+)/;
 
     this.onChange = this.onChange.bind(this);
     this.onKeyPress = this.onKeyPress.bind(this);
+    this.onGeneratedVideos = this.onGeneratedVideos.bind(this);
   }
 
   onChange(event) {
@@ -36,6 +38,12 @@ class SearchDisplayYoutube extends Component {
     }
   }
 
+  onGeneratedVideos(videos) {
+    this.setState({
+      videos
+    });
+  }
+
   render() {
     return (
       <div>
@@ -54,9 +62,14 @@ class SearchDisplayYoutube extends Component {
             {this.state.url !== ""
               ? <div>
                   <EmbeddedYoutube url={this.state.url} />
-                  <GeneratePlaylistButton videoId={this.state.url} />
+                  <GeneratePlaylistButton
+                    videoId={this.state.url}
+                    onGeneratedVideos={this.onGeneratedVideos}
+                  />
                 </div>
               : null}
+
+            {this.state.videos.length !== 0 ? <div /> : null}
           </Col>
         </Row>
       </div>
