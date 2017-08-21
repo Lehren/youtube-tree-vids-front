@@ -1,5 +1,6 @@
 {
   "name": "youtube-tree-vids-front",
+  "homepage": "https://lehren.github.io/youtube-tree-vids",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -13,6 +14,7 @@
   },
   "devDependencies": {
     "enzyme": "^2.8.2",
+    "gh-pages": "^1.0.0",
     "husky": "^0.13.4",
     "lint-staged": "^3.6.0",
     "prettier": "^1.4.4",
@@ -25,7 +27,9 @@
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
-    "precommit": "lint-staged"
+    "precommit": "lint-staged",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
   },
   "lint-staged": {
     "src/**/*.*": [
