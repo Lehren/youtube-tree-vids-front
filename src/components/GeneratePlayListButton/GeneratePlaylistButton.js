@@ -17,26 +17,46 @@ class GeneratePlaylistButton extends Component {
         "&relatedToVideoId=1" +
         "&type=video" +
         "&key=2" +
-        "&maxResults=1"
+        "&maxResults=3"
     );
     url.searchParams.set("key", settings.API_KEY);
     let results = [];
-    this.buildPlaylistRecursively(url, this.props.videoId, results).then(() => {
+    let visitedVideos = {};
+    let counter = 1;
+    visitedVideos[this.props.videoId] = this.props.videoId;
+    this.buildPlaylistRecursively(
+      url,
+      counter,
+      this.props.videoId,
+      results,
+      visitedVideos
+    ).then(() => {
       this.props.onGeneratedVideos(results);
     });
   }
 
-  buildPlaylistRecursively(url, id, results) {
+  buildPlaylistRecursively(url, maxResults, id, results, visitedVideos) {
     if (results.length >= 20) return;
     url.searchParams.set("relatedToVideoId", id);
+    url.searchParams.set("maxResults", maxResults);
     return axios
       .get(url)
       .then(result => {
-        results.push(result.data.items[0]);
+        let currentVideoId = result.data.items[0].id.videoId;
+        let i = 0;
+        while (visitedVideos[currentVideoId] !== undefined) {
+          i = i + 1;
+          currentVideoId = result.data.items[i].id.videoId;
+        }
+        visitedVideos[currentVideoId] = currentVideoId;
+
+        results.push(result.data.items[i]);
         return this.buildPlaylistRecursively(
           url,
-          result.data.items[0].id.videoId,
-          results
+          maxResults + 1,
+          currentVideoId,
+          results,
+          visitedVideos
         );
       })
       .catch(error => {
